@@ -3,10 +3,10 @@ from pylab import *
 from math import *
 from visual import *
 
-g = 9.81
+g = 9.81                                #These two lines gives the constants
 l = 0.15
 r = array([89.0,0],float)
-def f(r,t):
+def f(r,t):                             #This defines dw/dt and dtheta/dt into a two variable function
     theta = r[0]
     omega = r[1] 
     ftheta = omega
@@ -27,7 +27,7 @@ def d(t):
 
 
     
-for t in tpoints:
+for t in tpoints:                       #This is the code for the leapfrog method by finding the midpoints for each step
    xpoints.append(r[0])
    ypoints.append(r[1])
    half_step = d(t) + (0.5*h*f(r,t))
@@ -36,7 +36,7 @@ for t in tpoints:
    r += (d(t) + h*f(half_step, t + 0.5*h)) - (half_step + h*f(one_step, t+h))    
 
 
-plot(tpoints,xpoints)
-xlabel("time (s)")
+plot(tpoints,xpoints)                   #This produces a graph of the function
+xlabel("time (s)")  
 ylabel("theta")
 show()

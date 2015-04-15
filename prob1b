@@ -1,1 +1,42 @@
+from numpy import *
+from pylab import *
+from math import *
+from visual import *
 
+g = 9.81
+l = 0.15
+r = array([89.0,0],float)
+def f(r,t):
+    theta = r[0]
+    omega = r[1] 
+    ftheta = omega
+    fomega = -(g/l)*sin(theta)
+    return array([ftheta,fomega],float)
+ 
+a = 0.0
+b = 20.0
+N = 10000
+h = (b-a)/N
+   
+tpoints = arange(a,b,h)
+xpoints = []
+ypoints = []
+
+def d(t):
+        return t
+
+
+    
+for t in tpoints:
+   xpoints.append(r[0])
+   ypoints.append(r[1])
+   half_step = d(t) + (0.5*h*f(r,t))
+   k1 = h*f(half_step,t+0.5*h)
+   one_step = d(t) + k1
+   r += (d(t) + h*f(half_step, t + 0.5*h)) - (half_step + h*f(one_step, t+h))    
+
+
+plot(tpoints,xpoints)
+xlabel("time (s)")
+ylabel("theta")
+show()
